@@ -1,0 +1,40 @@
+{
+  "name": "enrollbot",
+  "description": "Enroll into courses automatically at uWaterloo",
+  "version": "0.0.1",
+  "keywords": [
+    "Waterloo","uWaterloo",
+    "course", "courses",
+    "class", "classes",
+    "enroll", "enrollment"
+  ],
+  "homepage": "https://github.com/zhangsu/enrollbot",
+  "bugs": {
+    "url": "https://github.com/zhangsu/enrollbot/issues",
+    "email": "me@zhang.su"
+  },
+  "license": "WTFPL",
+  "author": {
+    "name": "Su Zhang",
+    "email": "me@zhang.su",
+    "url": "http://zhang.su"
+  },
+  "contributors": [
+  ],
+  "files": [
+    "bot.coffee",
+    "credentials.yml",
+    "README.md"
+  ],
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/zhangsu/enrollbot"
+  },
+  "dependencies": {
+    "async": "x",
+    "coffee-script": "1.x",
+    "js-yaml": "x",
+    "node-phantom": "x",
+    "socket.io": "0.9.x"
+  }
+}
