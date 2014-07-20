@@ -16,6 +16,12 @@ async.series [
       callback(err, 'initializing webpage')
   ,
   (callback) ->
+    page.onUrlChanged = (targetUrl) ->
+      console.log('Navigating to', targetUrl)
+
+    page.onConsoleMessage = (msg, lineNum, sourceId) ->
+      console.log '### JavaScript console: ' + msg
+
     console.log 'Opening the login page...'
     page.open 'https://quest.pecs.uwaterloo.ca/psp/SS', (err, status) ->
       unless err
@@ -48,9 +54,6 @@ async.series [
       callback(err, 'getting password')
   ,
   (callback) ->
-    page.onNavigationRequested = (url, type, willNavigate, main) ->
-      console.log url, type, willNavigate, main
-
     console.log 'Logging in...'
     page.evaluate (credential) ->
       try
