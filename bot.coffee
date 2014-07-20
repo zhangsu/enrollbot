@@ -38,5 +38,5 @@ async.series [
 
 ], (err, results) ->
   if (err)
-    console.log 'Error:', err
+    console.log 'Error when', err
   phantom.exit()
