@@ -1,6 +1,7 @@
 async = require 'async'
+read = require 'read'
 
-phantom = page = undefined
+phantom = page = credential = undefined
 
 async.series [
   (callback) ->
@@ -28,14 +29,36 @@ async.series [
       callback(err, 'including JQuery')
   ,
   (callback) ->
+    credentialFilename = require('path').join(__dirname, 'credential.yml')
+
+    console.log 'Reading credential from', credentialFilename
+    rawYaml = require('fs').readFileSync(credentialFilename, 'utf8')
+    credential = require('js-yaml').safeLoad(rawYaml)
+
+    if not credential.userid
+      read prompt: 'Userid: ', (err, userid) ->
+        credential.userid = userid
+        callback(err, 'reading userid from file')
+    else
+      callback(null, 'reading userid from stdin')
+  ,
+  (callback) ->
+    read prompt: 'Password: ', silent: true, (err, password) ->
+      credential.password = password
+      callback(err, 'getting password')
+  ,
+  (callback) ->
+    page.onNavigationRequested = (url, type, willNavigate, main) ->
+      console.log url, type, willNavigate, main
+
+    console.log 'Logging in...'
     page.evaluate ->
-      $('input[value="Sign in"]')
+      $('input[name=userid]').val(credential.userid)
+      $('input[name=password]').val(credential.password)
+      $('input[value="Sign in"]').click()
     ,
     (err, result) ->
-      console.log(result)
-
-    callback(null, 'success')
-
+      callback(err, 'logging in')
 ], (err, results) ->
   if (err)
     console.log 'Error when', err
