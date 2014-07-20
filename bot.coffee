@@ -9,11 +9,13 @@ async.series [
       callback(err, 'initializing PhantomJS')
   ,
   (callback) ->
+    console.log 'Initializing PhantomJS...'
     phantom.createPage (err, pg) ->
       page = pg
       callback(err, 'initializing webpage')
   ,
   (callback) ->
+    console.log 'Opening the login page...'
     page.open 'https://quest.pecs.uwaterloo.ca/psp/SS', (err, status) ->
       unless err
         if status != 'success'
