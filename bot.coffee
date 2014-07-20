@@ -24,7 +24,7 @@ async.series [
       callback(err, 'opening login page')
   ,
   (callback) ->
-    jsUrl = 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'
+    jsUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'
     page.includeJs jsUrl, (err) ->
       callback(err, 'including JQuery')
   ,
