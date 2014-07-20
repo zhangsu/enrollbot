@@ -52,14 +52,29 @@ async.series [
       console.log url, type, willNavigate, main
 
     console.log 'Logging in...'
-    page.evaluate ->
-      $('input[name=userid]').val(credential.userid)
-      $('input[name=password]').val(credential.password)
-      $('input[value="Sign in"]').click()
+    page.evaluate (credential) ->
+      try
+        jQuery('input[name=userid]').val(credential.userid)
+        jQuery('input[name=pwd]').val(credential.password)
+        jQuery('input[name=Submit]').click()
+        null
+      catch err
+        err
     ,
-    (err, result) ->
-      callback(err, 'logging in')
-], (err, results) ->
+    (err, evalErr) ->
+      callback(err or evalErr, 'logging in')
+    ,
+    credential
+  ,
+  (callback) ->
+    setTimeout ->
+      # TODO PhantomJS crashes after 3 redirections.
+      callback(null, 'waiting for redirection after login')
+    ,
+    15000
+], (err, actions) ->
   if (err)
-    console.log 'Error when', err
+    [..., lastAction] = actions
+    console.log 'Error when ' + lastAction + ':'
+    console.log err
   phantom.exit()
