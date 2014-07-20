@@ -30,11 +30,6 @@ async.series [
       callback(err, 'opening login page')
   ,
   (callback) ->
-    jsUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'
-    page.includeJs jsUrl, (err) ->
-      callback(err, 'including JQuery')
-  ,
-  (callback) ->
     credentialFilename = require('path').join(__dirname, 'credential.yml')
 
     console.log 'Reading credential from', credentialFilename
@@ -57,9 +52,9 @@ async.series [
     console.log 'Logging in...'
     page.evaluate (credential) ->
       try
-        jQuery('input[name=userid]').val(credential.userid)
-        jQuery('input[name=pwd]').val(credential.password)
-        jQuery('input[name=Submit]').click()
+        document.getElementsByName("userid")[0].value = credential.userid
+        document.getElementsByName("pwd")[0].value = credential.password
+        document.getElementsByName("Submit")[0].click()
         null
       catch err
         err
