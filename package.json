@@ -36,6 +36,7 @@
     "casperjs": "x",
     "coffee-script": "1.x",
     "js-yaml": "x",
-    "read": "x"
+    "read": "x",
+    "yargs": "x"
   }
 }

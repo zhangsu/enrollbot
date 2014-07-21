@@ -1,6 +1,11 @@
 read = require 'read'
 {spawn} = require 'child_process'
 
+argv = require('yargs')
+  .alias(term: 't', 'base': 'b', 'var': 'v')
+  .default(t: 1, b: 20, v: 5)
+  .argv
+
 credential = {}
 
 require('async').series [
@@ -28,7 +33,13 @@ require('async').series [
     console.error err
   else
     enroll = ->
-      child = spawn 'node_modules/casperjs/bin/casperjs', ['enroll.coffee']
+      console.log 'term', argv.t
+      console.log 'delay base', argv.b
+      console.log 'delay variation', argv.v
+      child = spawn 'node_modules/casperjs/bin/casperjs', [
+        'enroll.coffee',
+        argv.t
+      ]
 
       child.stdin.write credential.userid + '\n'
       child.stdin.write credential.password + '\n'
@@ -42,12 +53,12 @@ require('async').series [
       child.on 'close', (code) ->
         return if code == 0
 
-        # Wait 20 min +/- a random number of mins < 5 before retrying.
-        retryDelaySec = 20 * 60 + Math.random() * 10 * 60 - 5 * 60
-        console.log 'Retrying in ' + retryDelaySec + ' seconds.'
+        # Wait argv.b min +/- a random number of mins < argv.v.
+        retryDelayMin = argv.b + Math.random() * 2 * argv.v - argv.v
+        console.log 'Retrying in ' + retryDelayMin + ' mins.'
         setTimeout ->
           enroll()
         ,
-        retryDelaySec * 1000
+        retryDelayMin * 60 * 1000
 
     enroll()

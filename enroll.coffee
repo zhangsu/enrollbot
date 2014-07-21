@@ -7,6 +7,8 @@ casper = require('casper').create
 
 screenshotFilename = 'quest.png'
 credential = {}
+term = casper.cli.args[0]
+term = 1 if term == undefined
 
 fs.remove(screenshotFilename) if fs.exists(screenshotFilename)
 
@@ -44,7 +46,7 @@ casper.waitForSelector iframeSelector, ->
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     this.waitForSelector continueButtonSelector, ->
-      this.click('input[value="1"]')
+      this.click("input[value='#{term}']")
 
 casper.withFrame iframeName, ->
   this.clickLabel 'Continue'
