@@ -32,9 +32,9 @@
   },
   "dependencies": {
     "async": "x",
+    "casperjs": "x",
     "coffee-script": "1.x",
     "js-yaml": "x",
-    "node-phantom": "x",
-    "socket.io": "0.9.x"
+    "read": "x"
   }
 }
