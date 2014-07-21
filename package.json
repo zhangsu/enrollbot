@@ -23,6 +23,7 @@
   ],
   "files": [
     "bot.coffee",
+    "enroll.coffee",
     "credentials.yml",
     "README.md"
   ],
