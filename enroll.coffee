@@ -57,9 +57,8 @@ casper.waitForSelector iframeSelector, ->
 
 successful = false
 errorIconSelector =
-  'img[src="/cs/SS/cache/85310/PS_CS_STATUS_ERROR_ICN_1.gif"]'
-fullIconSelector =
-  'img[src="/cs/SS/cache/85310/PS_CS_STATUS_CLOSED_ICN_1.gif"]'
+  'div[id^="win0divDERIVED_REGFRM1_SSR_STATUS_LONG"]' +
+    ' img[src="/cs/SS/cache/85310/PS_CS_STATUS_ERROR_ICN_1.gif"]'
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     finishButtonLabel = 'Finish Enrolling'
