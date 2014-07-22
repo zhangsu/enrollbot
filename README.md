@@ -1,6 +1,6 @@
-# enrollbot
+# Enrollbot
 
-Bot that automates the process of trying to get into a course during open enrollment at the University of Waterloo. Simly leave Enrollbot running and it will keep trying to enroll for you on Quest until success.
+Bot that automates the process of trying to get into a course during open enrollment at the University of Waterloo. Simply leave Enrollbot running and it will keep trying to enroll for you on Quest until success.
 
 --------------------------------------
 
@@ -31,17 +31,17 @@ Enrollbot is a simple bot that only works during open enrollment. Enrollbot shou
 Login -> Click "Enroll" -> Click "add" -> Choose term -> Click "Continue" -> (Add courses into your cart) -> Click "Proceed to Step 2 of 3" -> Click "Finish Enrolling".
 
 ### Must have your cart ready
-Currently, Enrollbot only supports a simple procedure of enroll into the courses in your cart. The courses you want to added must be pre-added in your cart before running Enrollbot.
+Currently, Enrollbot only supports a simple procedure of enroll into the courses in your cart. The courses you want to add must be pre-added to your cart before running Enrollbot.
 
 --------------------------------------
 
 ## Use
-There is a step of choosing the term in a term table when you enroll on Quest, identified by a zero-based index, e.g., 0 for the first term in the table, 2 for the third term in the table). By default, Enrollbot chooses 1 because there are usually only two terms in the table, and you are more likely to enroll for the next term.
+There is a step of choosing the term in a term table when you enroll on Quest, identified by a zero-based index, e.g., 0 for the first term in the table, 2 for the third term in the table). By default, Enrollbot chooses 1 because there are usually only two terms in the table with the first one being the current term and the second one being the next term, and you are more likely to enroll for the next term.
 
 You can also customize delay times. The delay variation time v is an upper limit for a random amount of time added to or subtracted from the delay base time b, which makes your enroll requests on Quest look less robotic and more random.
 The actual delay time between retries is a random number in the interval [b - v, b + v).
 
-Set the delay time to a reasonable high value to prevent DoS attack on Quest. You will get banned by the admin if your request frequency is too high and start DoSing Quest.
+Set the delay time to a reasonable high value to prevent DoS attack on Quest. You will get banned (or at least audited) by the admin if your request frequency is too high and start DoSing Quest.
 
 Run with default configuration that chooses the second term in the term table
 ```
@@ -67,9 +67,9 @@ node_modules/coffee-script/bin/coffee bot.coffee -v 5
 ```
 
 ### Credential
-Upon running Enrollbo, you will be prompted for entering your quest id and password. If you are paranoid about this, check out the source code and make sure Enrollbot is not a keylogger. Password you typed won't be echoed in the terminal.
+Upon running Enrollbot, you will be prompted for entering your quest id and password. If you are paranoid about this, check out the source code and make sure Enrollbot is not a keylogger. Password you typed won't be echoed in the terminal.
 
-You can save your Quest userid in `credential.yml` to save your from entering it everytime you run Enrollbot.
+You can save your Quest userid in `credential.yml` to save your from entering it everytime you run Enrollbot. You only need to enter your credential once per running session, i.e., no need to do it between enroll tries happened in the same bot process.
 
 ### Result
 Enrollbot terminates when it thinks the enrollment is successful, or it continues if it thinks the enrollment is failed. In either cases, a `quest.png` screenshot of the final result page is taken in each trial run.
