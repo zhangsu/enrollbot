@@ -14,7 +14,7 @@ Enrollbot uses PhantomJS, which is not a node module. There is a couple of ways 
 #### Install it by [downloading the official binary](http://phantomjs.org/download.html)
 You need to make sure that the binary is in your PATH environment variable.
 
-#### Install through native package manage
+#### Install through native package manager
 ##### Arch
 
 ```
