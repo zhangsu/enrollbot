@@ -16,9 +16,15 @@ You need to make sure that the binary is in your PATH environment variable.
 
 #### Install through native package manage
 ##### Arch
+
+```
 pacman -S phantomjs
+```
+
 ##### Ubuntu
+```
 apt-get install phantomjs
+```
 
 ### CasperJS and other node modules
 These will be installed when you do
