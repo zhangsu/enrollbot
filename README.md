@@ -75,7 +75,7 @@ node_modules/coffee-script/bin/coffee bot.coffee -v 5
 ### Credential
 Upon running Enrollbot, you will be prompted for entering your quest id and password. If you are paranoid about this, check out the source code and make sure Enrollbot is not a keylogger. Password you typed won't be echoed in the terminal.
 
-You can save your Quest userid in `credential.yml` to save your from entering it everytime you run Enrollbot. You only need to enter your credential once per running session, i.e., no need to do it between enroll tries happened in the same bot process.
+You can save your Quest userid in `credential.yml` to save you from entering it everytime you run Enrollbot. For security reason, password cannot be stored in the file. You only need to enter your credential once per running session, i.e., no need to do it between enroll tries happened in the same bot process.
 
 ### Result
 Enrollbot terminates when it thinks the enrollment is successful, or it continues if it thinks the enrollment is failed. In either cases, a `quest.png` screenshot of the final result page is taken in each trial run.
