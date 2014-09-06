@@ -40,8 +40,9 @@ continueButtonSelector = '#DERIVED_SSS_SCT_SSR_PB_GO'
 
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
-    this.waitForSelector continueButtonSelector, ->
-      this.clickLabel 'add'
+    addLabel = 'add'
+    this.waitForText addLabel, ->
+      this.clickLabel addLabel
 
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
