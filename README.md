@@ -42,7 +42,7 @@ Currently, Enrollbot only supports a simple procedure of enroll into the courses
 --------------------------------------
 
 ## Use
-There is a step of choosing the term in a term table when you enroll on Quest, identified by a zero-based index, e.g., 0 for the first term in the table, 2 for the third term in the table). By default, Enrollbot chooses 1 because there are usually only two terms in the table with the first one being the current term and the second one being the next term, and you are more likely to enroll for the next term.
+There is a step of choosing the term in a term table when you enroll on Quest, identified by a zero-based index, e.g., 0 for the first term in the table, 2 for the third term in the table). By default, Enrollbot chooses 1 because there are usually only two terms in the table with the first one being the current term and the second one being the next term, and you are more likely to enroll for the next term. However, during the first few weeks of a new term, Quest skips this process and jumps directly to your class schedule. In this case, you can pass a "null" to the term parameter.
 
 You can also customize delay times. The delay variation time v is an upper limit for a random amount of time added to or subtracted from the delay base time b, which makes your enroll requests on Quest look less robotic and more random.
 The actual delay time between retries is a random number in the interval [b - v, b + v).
@@ -58,6 +58,12 @@ Choose the first term in the table:
 ```
 node_modules/coffee-script/bin/coffee bot.coffee --term=0
 node_modules/coffee-script/bin/coffee bot.coffee -t 0
+```
+
+Skip the step of choosing term during the first few weeks of a new term:
+```
+node_modules/coffee-script/bin/coffee bot.coffee --term=null
+node_modules/coffee-script/bin/coffee bot.coffee -t null
 ```
 
 Run with custom delay base time between retries, in mins (30 mins in this case):

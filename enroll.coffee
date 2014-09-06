@@ -44,13 +44,14 @@ casper.waitForSelector iframeSelector, ->
     this.waitForText addLabel, ->
       this.clickLabel addLabel
 
-casper.waitForSelector iframeSelector, ->
-  this.withFrame iframeName, ->
-    this.waitForSelector continueButtonSelector, ->
-      this.click("input[value='#{term}']")
+if term != 'null'
+  casper.waitForSelector iframeSelector, ->
+    this.withFrame iframeName, ->
+      this.waitForSelector continueButtonSelector, ->
+        this.click("input[value='#{term}']")
 
-casper.withFrame iframeName, ->
-  this.clickLabel 'Continue'
+  casper.withFrame iframeName, ->
+    this.clickLabel 'Continue'
 
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
