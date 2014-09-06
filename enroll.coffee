@@ -3,7 +3,7 @@ fs = require 'fs'
 casper = require('casper').create
   verbose: true
   waitTimeout: 60000
-  logLevel: 'debug'
+  logLevel: 'info'
 
 screenshotFilename = 'quest.png'
 credential = {}
@@ -34,6 +34,7 @@ casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     enrollLinkSelector = '#DERIVED_SSS_SCR_SSS_LINK_ANCHOR3'
     this.waitForSelector enrollLinkSelector, ->
+      casper.log '[enrollbot] Clicking "Enroll"', 'info'
       this.click enrollLinkSelector
 
 continueButtonSelector = '#DERIVED_SSS_SCT_SSR_PB_GO'
@@ -42,12 +43,14 @@ casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     addLabel = 'add'
     this.waitForText addLabel, ->
+      casper.log "[enrollbot] Clicking '#{addLabel}'", 'info'
       this.clickLabel addLabel
 
 if term != 'null'
   casper.waitForSelector iframeSelector, ->
     this.withFrame iframeName, ->
       this.waitForSelector continueButtonSelector, ->
+        casper.log "[enrollbot] Choosing term #{term}", 'info'
         this.click("input[value='#{term}']")
 
   casper.withFrame iframeName, ->
@@ -57,6 +60,7 @@ casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     proceedButtonLabel = 'Proceed to Step 2 of 3'
     this.waitForText proceedButtonLabel, ->
+      casper.log "[enrollbot] Clicking #{proceedButtonLabel}", 'info'
       this.clickLabel proceedButtonLabel
 
 successful = false
@@ -67,6 +71,7 @@ casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     finishButtonLabel = 'Finish Enrolling'
     this.waitForText finishButtonLabel, ->
+      casper.log "[enrollbot] Clicking '#{finishButtonLabel}'", 'info'
       this.clickLabel finishButtonLabel
 
 casper.waitForSelector iframeSelector, ->
