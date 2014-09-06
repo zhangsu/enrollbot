@@ -37,8 +37,6 @@ casper.waitForSelector iframeSelector, ->
       casper.log '[enrollbot] Clicking "Enroll"', 'info'
       this.click enrollLinkSelector
 
-continueButtonSelector = '#DERIVED_SSS_SCT_SSR_PB_GO'
-
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     addLabel = 'add'
@@ -49,6 +47,7 @@ casper.waitForSelector iframeSelector, ->
 if term != 'null'
   casper.waitForSelector iframeSelector, ->
     this.withFrame iframeName, ->
+      continueButtonSelector = '#DERIVED_SSS_SCT_SSR_PB_GO'
       this.waitForSelector continueButtonSelector, ->
         casper.log "[enrollbot] Choosing term #{term}", 'info'
         this.click("input[value='#{term}']")
