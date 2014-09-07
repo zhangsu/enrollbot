@@ -40,7 +40,8 @@ casper.waitForSelector iframeSelector, ->
 casper.waitForSelector iframeSelector, ->
   this.withFrame iframeName, ->
     addLabel = 'add'
-    this.waitForText addLabel, ->
+    tableRowSelector = '#win0divDERIVED_SSTSNAV_SSTS_NAV_SUBTABS'
+    this.waitForSelector tableRowSelector, ->
       casper.log "[enrollbot] Clicking '#{addLabel}'", 'info'
       this.clickLabel addLabel
 
